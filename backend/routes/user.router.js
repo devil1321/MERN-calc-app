@@ -73,33 +73,42 @@ router.post('/login',(req,res,next)=>{
 // logout
 router.get('/logout',(req,res)=>{
     req.logout()
+    res.redirect('/')
 })
 router.get('/dashboard',ensureAuthenticated, (req,res) =>{
-    res.send('dashboard')
+    if(req.user.isAdmin === false){
+        res.send('dashboard')
+    }else{
+        res.redirect('/users/admin')
+    }
     // User.find()
     // .then(user =>res.json(user))
     // .catch(err=>res.status(400).json('Error: ' + err))
 })
-router.route('/admin',ensureAuthenticated).get((req,res) =>{
-    res.send('admin')
+router.get('/admin',ensureAuthenticated, (req,res) =>{
+    if(req.user.isAdmin === true){
+        res.send('admin')
+    }else{
+        res.redirect('/users/dashboard')
+    }
     // User.find()
     // .then(user =>res.json(user))
     // .catch(err=>res.status(400).json('Error: ' + err))
 })
 
-router.route('/all/:id',ensureAuthenticated).get((req,res) =>{
+router.get('/all/:id',ensureAuthenticated, (req,res) =>{
     User.findById(req.params.id)
     .then(user=>res.json(user))
     .catch(err=>res.status(400).json("Error: " + err))
 })
 
-router.route('/delete/:id',ensureAuthenticated).delete((req,res) =>{
+router.delete('/delete/:id',ensureAuthenticated, (req,res) =>{
     User.findByIdAndDelete(req.params.id)
     .then(user=>res.json('Exercise deleted'))
     .catch(err=>res.status(400).json("Error: " + err))
 })
 
-router.route('/update/:id',ensureAuthenticated).post((req,res) =>{
+router.post('/update/:id', ensureAuthenticated, (req,res) =>{
     User.findById(req.params.id)
         .then(user=>{
             // exercise.username = req.body.username
