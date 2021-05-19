@@ -75,21 +75,53 @@ router.get('/logout',(req,res)=>{
     req.logout()
     res.redirect('/')
 })
-router.get('/dashboard',ensureAuthenticated, (req,res) =>{
-    if(req.user.isAdmin === false){
-        res.send('dashboard')
+router.get('/get',(req,res)=>{
+    if(req.user !== undefined){
+        if(req.user.isActive === true){
+            res.send('get')
+        }else{
+            res.redirect('/')
+        }
     }else{
-        res.redirect('/users/admin')
+        res.redirect('/')
+        req.logout()
+    }
+})
+router.get('/dashboard',ensureAuthenticated, (req,res) =>{
+    if(req.user !== undefined) {
+        if(req.user.isActive === true){
+            if(req.user.isAdmin === false){
+                res.send('dashboard')
+            }else{
+                res.redirect('/users/admin')
+            }
+        }else{
+            req.logout()
+            res.redirect('/')
+        }
+    }else{
+        req.logout()
+        res.redirect('/')
     }
     // User.find()
     // .then(user =>res.json(user))
     // .catch(err=>res.status(400).json('Error: ' + err))
 })
 router.get('/admin',ensureAuthenticated, (req,res) =>{
-    if(req.user.isAdmin === true){
-        res.send('admin')
+    if(req.user !== undefined) {
+        if(req.user.isActive === true){
+            if(req.user.isAdmin === true){
+                res.send('admin')
+            }else{
+                res.redirect('/users/dashboard')
+            }
+        }else{
+            req.logout()
+            res.redirect('/')
+        }
     }else{
-        res.redirect('/users/dashboard')
+        req.logout()
+        res.redirect('/')
     }
     // User.find()
     // .then(user =>res.json(user))
