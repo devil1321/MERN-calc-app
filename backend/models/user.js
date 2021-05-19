@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const User = new mongoose.Schema({
+const UserSchema = new mongoose.Schema({
     isAdmin:{
         type:Boolean
     },
@@ -8,14 +8,13 @@ const User = new mongoose.Schema({
         type:Boolean
     },
     login:{
-        type:String,
-        required:true
+        type:String
     },
     email:{
         type:String,
         required:true
     },
-    haslo:{
+    password:{
         type:String,
         required:true
     },
@@ -34,7 +33,8 @@ const User = new mongoose.Schema({
         type:String
     },
     auto:{
-        type:Boolean
+        type:Boolean,
+        required:true
     },
     region:{
         type:String,
