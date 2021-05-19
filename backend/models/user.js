@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 
-const DriverSchema = new mongoose.Schema({
+const User = new mongoose.Schema({
+    isAdmin:{
+        type:Boolean
+    },
     isActive:{
         type:Boolean
     },
@@ -65,6 +68,6 @@ const DriverSchema = new mongoose.Schema({
     ]
 },{timestamps:true})
 
-const Driver = mongoose.model('Driver',DriverSchema)
+const User = mongoose.model('Users',UserSchema)
 
-module.exports = Driver
+module.exports = User
