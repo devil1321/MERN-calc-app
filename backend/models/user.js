@@ -39,33 +39,7 @@ const UserSchema = new mongoose.Schema({
     region:{
         type:String,
         required:true
-    },
-    umowy:[
-            {
-                naSwoimAucie:{
-                    umowaZlecenie:{
-                        data: Buffer, contentType: String
-                    },
-                    umowaNajmuSamochodu:{
-                        data: Buffer, contentType: String
-                    },
-                    OswiadczenieNaCelePodatkowe:{
-                        data: Buffer, contentType: String
-                    },
-                },
-                naMoimAucie:{
-                    umowaZlecenie:{
-                        data: Buffer, contentType: String
-                    },
-                    OswiadczeniePrawaJazdy:{
-                        data: Buffer, contentType: String
-                    },
-                    OswiadczenieNaCelePodatkowe:{
-                        data: Buffer, contentType: String
-                    }
-                }
-            }
-    ]
+    }
 },{timestamps:true})
 
 const User = mongoose.model('Users',UserSchema)

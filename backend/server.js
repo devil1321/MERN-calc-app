@@ -6,8 +6,9 @@ const session = require('express-session')
 const passport = require('passport')
 
 const userRoute = require('./routes/user.router')
-const fakturyRoute = require('./routes/faktury.router')
-const rozliczeniaRoute = require('./routes/rozliczenia.router')
+const fakturyRoute = require('./routes/invoice.router')
+const rozliczeniaRoute = require('./routes/settlement.router')
+const umowyRoute = require('./routes/agreement.router')
 
 
 require('dotenv').config()
@@ -40,20 +41,13 @@ app.use(passport.session())
 app.get('/', (req,res)=>{
     res.send('Home')
 })
-app.use('/users',userRoute)
 
-app.get('/faktury',(req,res)=>{
-    res.send('faktury')
-})
-app.get('/rozliczenia',(req,res)=>{
-    res.send('rozliczenia')
-})
-app.get('/umowy',(req,res)=>{
-    res.send('umowy')
-})
-app.get('/skan',(req,res)=>{
-    res.send('skan')
-})
+app.use('/users',userRoute)
+app.get('/faktury',fakturyRoute)
+app.get('/rozliczenia',rozliczeniaRoute)
+app.get('/umowy',umowyRoute)
+
+
 // app.use((req,res)=>{
 //     res.status(404).send('<h1>404</h1>')
 // })

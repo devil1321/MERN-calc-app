@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
 
-
 var Schema = mongoose.Schema
 var ObjectId = Schema.ObjectId
 
-const RozliczeniaSchema = new mongoose.Schema({
+const SettlementSchema = new mongoose.Schema({
     userId:ObjectId,
+    data:{
+        type:Date
+    },
     imie:{
         type:String,
     },
@@ -56,6 +58,6 @@ const RozliczeniaSchema = new mongoose.Schema({
  
 },{timestamps:true})
 
-const Rozliczenia = mongoose.model('Rozliczenia',RozliczeniaSchema)
+const Settlement = mongoose.model('Rozliczenia',SettlementSchema)
 
-module.exports = Rozliczenia
+module.exports = Settlement

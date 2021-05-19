@@ -6,6 +6,12 @@ const ObjectId = Schema.ObjectId
 
 const FakturySchema = new mongoose.Schema({
     userId:ObjectId,
+    file:{
+        data: Buffer, contentType: String 
+    },
+    data:{
+        type:Date
+    },
     imie:{
         type:String,
         required:true
